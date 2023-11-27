@@ -1,0 +1,159 @@
+$bg: #272c38;
+.portfolio {
+  position: absolute;
+  height: 100vh;
+  width: 100%;
+  top: 0;
+  background: $bg;
+  transition: 0.5s easeOut;
+  transform: translateY(0);
+  overflow: hidden;
+}
+
+.slideshow {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
+.slide {
+  $root: &;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 100%;
+  grid-template-rows: 100%;
+  align-items: center;
+  justify-items: center;
+  top: 0;
+  &--current {
+    position: relative;
+  }
+  &__copy {
+    overflow: hidden;
+    grid-area: 1 / 1 / 1 / 1;
+    position: relative;
+    text-align: center;
+  }
+  &__title {
+    font-size: 6vw;
+    margin: 0;
+    margin-bottom: 0;
+    display: block;
+    color: white;
+    overflow: hidden;
+
+    span {
+      display: block;
+    }
+  }
+  &__subtitle {
+    font-size: 1.6vw;
+    margin: lightgrey;
+    color: grey;
+    display: block;
+    overflow: hidden;
+    span {
+      display: block;
+    }
+  }
+  &__img-wrap {
+    height: 100%;
+    width: 100%;
+    grid-area: 1 / 1 / 1 / 1;
+    position: relative;
+    overflow: hidden;
+  }
+  &__img {
+    background: $bg;
+    height: 100%;
+    width: 100%;
+    background-position: center center;
+    transform: scale(1.2);
+    transition: 0.4s ease;
+    &:hover {
+      transform: scale(1);
+    }
+    #{$root}--leading-edge & {
+      background: url("https://thumb.ac-illust.com/2b/2bb867cfe0a3bf57613a52f6f844863c_t.jpeg");
+      background-size: cover;
+      background-position: center right;
+    }
+    #{$root}--wanderwall & {
+      background: url("https://thumb.ac-illust.com/cf/cf8b964d27b4222926f632cda9ad5eb4_t.jpeg");      
+      background-size: cover;
+      background-position: center;
+    }
+  }
+  &__img-reveal {
+    background: $bg;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+  }
+}
+
+.page {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  opacity: 0;
+}
+
+.button {
+  position: absolute;
+  z-index: 10;
+  background: none;
+  padding: 0;
+  border: none;
+  &--next {
+    right: 0;
+    top: 50%;
+  }
+  &--prev {
+    left: 0;
+    top: 50%;
+  }
+}
+
+.arrows {
+  .arrow {
+    margin: -33px 0 0;
+    padding: 20px;
+    position: absolute;
+    top: 50%;
+    cursor: pointer;
+    z-index: 3;
+  }
+
+  .prev {
+    left: 30px;
+  }
+
+  .prev:hover .svg {
+    left: -10px;
+  }
+
+  .next {
+    right: 30px;
+  }
+
+  .next:hover .svg {
+    left: 10px;
+  }
+
+  .svg {
+    position: relative;
+    left: 0;
+    width: 14px;
+    height: 26px;
+    fill: #fff;
+    transition: left 0.2s ease;
+  }
+}

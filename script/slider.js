@@ -72,10 +72,9 @@ class Slide {
             console.log(titleOptions);
 
             // Moving & fading the image wrappper.
+
             gsap.to(this.DOM.revealer, this.config.duration, revealerOptions);
-
             gsap.to(this.DOM.subtitle, this.config.duration, subtitleOptions);
-
             gsap.to(this.DOM.imgWrapper, this.config.duration, imgOptions);
             gsap.to(this.DOM.title, this.config.duration, titleOptions);
             // Moving & fading the title and number.
@@ -101,6 +100,7 @@ class Slideshow {
 
     init() {
         this.slides[this.current].setCurrent();
+        this.slides[this.current].show("right");
         this.initEvents();
     }
 
@@ -156,7 +156,7 @@ window.addEventListener("load", (event) => {
     console.log("loaded");
     const slideshow = new Slideshow(document.querySelector(".slideshow"));
 
-    setInterval(() => {
-        slideshow.next()
-    }, 5000);
+    // setInterval(() => {
+    //     slideshow.next()
+    // }, 5000);
 });
