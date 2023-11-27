@@ -1,0 +1,120 @@
+@font-face {
+    font-family: '851tegaki';
+    src: url(../asset/851tegaki_zatsu_normal_0883.ttf);
+}
+
+@font-face {
+    font-family: 'syokaki-sarari';
+    src: url(../asset/syokaki-sarari.ttf);
+}
+
+.loading {
+    font-family: '851tegaki';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 36px;
+    z-index: 9999;
+}
+
+/* ---　中央寄せ --- */
+.loading .section {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 500px;
+    /* 任意 */
+}
+
+/* --- テキスト --- */
+.loading path {
+    fill: none;
+    /* 1,塗りの色 */
+    stroke: #FFF;
+    /* 2,線の色 */
+    stroke-dasharray: 2000;
+    /* 3,破線の間隔 */
+    stroke-dashoffset: 2000;
+    /* 4,破線の開始位置 */
+    stroke-width: 0.1;
+    /* 5,線の太さ */
+    animation: handwriting 3s ease-in forwards;
+    /* 6,名前 時間 タイミング 終了後の状態 */
+}
+
+/* --- アニメーション --- */
+@keyframes handwriting {
+    0% {
+        fill: transparent;
+        stroke-dashoffset: 2000;
+    }
+
+    30% {
+        fill: transparent;
+    }
+
+    60% {
+        fill: #FFF;
+    }
+
+    100% {
+        fill: #FFF;
+        stroke-dashoffset: 0;
+    }
+}
+
+.bg .bg-wrap {
+    position: relative;
+    display: inline-block;
+    margin-top: 5px;
+}
+
+.bg.is-animated .bg-wrap::before {
+    animation: bg 2.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    background: linear-gradient(to right, #362ae0 0%, #3b79cc 50%, #42d3ed 100%);
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transform-origin: left center;
+}
+
+.bg .bg-wrap .inn {
+    color: #fff;
+    display: inline-block;
+    font-size: 36px;
+    font-weight: bold;
+    padding: 5px 15px;
+    position: relative;
+    z-index: 1;
+}
+
+@keyframes bg {
+    0% {
+        opacity: 0;
+        transform: scaleX(0) translateX(-5%);
+    }
+
+    30% {
+        transform: scaleX(1) translateX(0);
+    }
+
+    100% {
+        transform: scaleX(1) translateX(0);
+    }
+
+    30%,
+    100% {
+        opacity: 1;
+    }
+}
