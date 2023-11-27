@@ -1,182 +1,89 @@
-
-class Slide {
-    constructor(el) {
-        this.DOM = { el: el };
-        this.DOM.img = this.DOM.el.querySelector(".slide__img");
-
-        this.config = {
-            duration: 0.6,
-            ease: Power1.out
-        };
-    }
-    setCurrent(isCurrent = true) {
-        this.DOM.el.classList[isCurrent ? "add" : "remove"]("slide--current");
-    }
-    hide(direction) {
-        return this.toggle("hide", direction);
-    }
-    show(direction) {
-        return this.toggle("show", direction);
-    }
-    toggle(action, direction) {
-        return new Promise((resolve, reject) => {
-            console.log(action, direction);
-            if (action === "show") {
-                return this.showImage(direction, resolve);
-            } else if (action === "hide") {
-                return this.hideImage(direction, resolve);
-            } else {
-                console.error("Directionの指定値にミスがあります。:" + direction);
-            }
-        });
-    }
-
-    hideImage(direction, resolve) {
-        const option = {
-            delay: 0,
-            ease: this.config.ease,
-            opacity: 0,
-            onComplete: resolve,
-            startAt: {},
-            x: direction === "right" ? "50%" : "-50%"
-        };
-        return gsap.to(this.DOM.img, option);
-    }
-
-    showImage(direction, resolve) {
-        const from = { opacity: 0, x: (direction === "right" ? "-50%" : "50%") };
-        const to = {
-            delay: this.config.duration / 2,
-            ease: this.config.ease,
-            onComplete: resolve,
-            opacity: 1,
-            x: "0%"
-        };
-
-        gsap.fromTo(this.DOM.img, from, to);
-    }
-}
-
-class Slideshow {
-    constructor(el) {
-        this.DOM = { el: el };
-        this.DOM.buttonNext = this.DOM.el.querySelector(".button--next");
-        this.DOM.buttonPrev = this.DOM.el.querySelector(".button--prev");
-        this.slides = [];
-
-        [...this.DOM.el.querySelectorAll(".slide")].forEach((slide) =>
-            this.slides.push(new Slide(slide))
-        );
-
-        this.slideCount = this.slides.length;
-        this.current = (this.slideCount - 1);
-        this.init();
-    }
-
-    init() {
-        this.slides[this.current].setCurrent();
-        this.initEvents();
-    }
-
-    initEvents() {
-        this.DOM.buttonNext.addEventListener("click", () => {
-            clearInterval(intervalFunction);
-            this.next();
-        });
-        this.DOM.buttonPrev.addEventListener("click", () => {
-            clearInterval(intervalFunction);
-            this.prev();
-        });
-    }
-
-    next() {
-        this.navigate("right");
-    }
-
-    prev() {
-        this.navigate("left");
-    }
-
-    getReverseString(direction) {
-        return direction === "right" ? "left" : "right";
-    }
-
-    navigate(direction) {
-        if (this.isAnimating) return;
-
-        this.isAnimating = true;
-
-        const nextSlide =
-            direction === "right"
-                ? this.current < this.slideCount - 1
-                    ? this.current + 1
-                    : 0
-                : this.current > 0
-                    ? this.current - 1
-                    : this.slideCount - 1;
-
-        Promise.all([
-            this.slides[this.current].hide(direction),
-            this.slides[nextSlide].show(direction)
-        ])
-            .then(() => {
-                this.slides[this.current].setCurrent(false);
-                this.slides[nextSlide].setCurrent();
-                this.current = nextSlide;
-                this.isAnimating = false;
-                console.log("done!");
-            })
-            .catch((error) => {
-                console.log(error);
-            });
-    }
-}
-
+// 画像を切り替えるクラス
 class ImageSwitcher {
 
     horizontalImages = [
-        "photos/16_9/004.jpg",
-        "photos/16_9/003.jpg",
-        "photos/16_9/002.jpg",
-        "photos/16_9/001.jpg",
+        "photos/horizontal/001.jpg",
+        "photos/horizontal/002.jpg",
+        "photos/horizontal/003.jpg",
+        "photos/horizontal/004.jpg",
     ];
 
     verticalImages = [
-        "photos/9_16/004.jpg",
-        "photos/9_16/003.jpg",
-        "photos/9_16/002.jpg",
-        "photos/9_16/001.jpg",
+        "photos/vertical/001.jpg",
+        "photos/vertical/002.jpg",
+        "photos/vertical/003.jpg",
+        "photos/vertical/004.jpg",
     ];
 
-    elements;
+    sliderImageElements;
 
     constructor() {
-        this.elements = document.querySelectorAll(".slide__img");
+        this.sliderImageElements = document.querySelectorAll(".splide__slide__image");
         this.switchImageIfRotated();
     }
 
     isHorizontal() {
-        return (window.innerHeight <= window.innerWidth);
+        const result = (window.innerHeight <= window.innerWidth);
+        console.log("isHorizontal : " + result);
+        return result;
     }
 
     switchImageIfRotated() {
-        console.log("isHorizontal : " + this.isHorizontal());
         if (this.isHorizontal()) {
-            this.elements.forEach((el, index) => { el.setAttribute("src", this.horizontalImages[index]) });
+            this.sliderImageElements.forEach((el, index) => { el.setAttribute("src", this.horizontalImages[index]); });
         } else {
-            this.elements.forEach((el, index) => { el.setAttribute("src", this.verticalImages[index]) });
+            this.sliderImageElements.forEach((el, index) => { el.setAttribute("src", this.verticalImages[index]); });
         }
     }
 }
 
+// スライダーのSplitejsの設定などを管理するクラス。
+class SplidejsManager {
 
-var intervalFunction;
-window.addEventListener("load", (event) => {
-    const slideshow = new Slideshow(document.querySelector(".slideshow"));
-    intervalFunction = setInterval(() => {
-        slideshow.prev()
-    }, 5000);
+    // splideの本体
+    splidejs;
 
-    const resolutionCalculator = new ImageSwitcher();
-    window.addEventListener('resize', () => resolutionCalculator.switchImageIfRotated());
+    scrollInterval = 5000;
+
+    option = {
+        type: "fade",
+        speed: 1000,
+        rewind: true,
+    };
+
+    initializeSplitejs(isEnableExtension) {
+        if (isEnableExtension) {
+            this.splidejs = new Splide('#image-carousel', this.option).mount(window.splide.Extensions);
+        } else {
+            this.splidejs = new Splide('#image-carousel', this.option).mount();
+        }
+    }
+
+    enableAutoScroll() {
+        setInterval(() => {
+            splidejsManager.next();
+        }, this.scrollInterval);
+    }
+
+    next() {
+        this.splidejs.go('+${i}');
+    }
+
+    prev() {
+        this.splidejs.go('-${i}');
+    }
+}
+
+
+// 各クラスの初期化
+const splidejsManager = new SplidejsManager();
+let imageSwitcher;
+document.addEventListener('DOMContentLoaded', () => {
+    splidejsManager.initializeSplitejs();
+    splidejsManager.enableAutoScroll();
+});
+
+window.addEventListener('load', () => {
+    imageSwitcher = new ImageSwitcher();
+    window.addEventListener('resize', () => imageSwitcher.switchImageIfRotated());
 });

@@ -2,69 +2,56 @@
 <html lang="ja">
 
 <head>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"
-        integrity="sha512-16esztaSRplJROstbIIdwX3N97V1+pZvV33ABoG1H2OyTttBxEGkTsoIVsiP1iaTtM8b3+hu2kB6pQ4Clr5yug=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="script/slider.js"></script>
     <link rel="stylesheet" href="css/destyle.css" />
     <link rel="stylesheet" href="css/slider.css" />
-    <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css?family=Open+Sans%3A400%2C400italic%2C600%2C700%2C700italic%7COswald%3A400%2C300%7CVollkorn%3A400%2C400italic" />
+    <script src="
+    https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js
+    "></script>
+    <link href="
+    https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css
+    " rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@200&family=Oswald:wght@300;400;500&display=swap"
+        rel="stylesheet">
 </head>
 
 <body>
+    <header class="header">
+        <h1>Kedama-camera</h1>
+        <nav class="nav">
+            <ul class="nav__menu">
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Portfolio</a></li>
+                <li><a href="#">Profile</a></li>
+                <li><a href="#">Trade Act</a></li>
+            </ul>
+        </nav>
+    </header>
+
+
     <div class="portfolio">
-
-        <div class="slideshow">
-
-
-            <div class="arrows">
-                <div class="arrow button--prev">
-                    <span class="svg svg-arrow-left">
-                        <svg version="1.1" id="svg4-Layer_1" xmlns="http://www.w3.org/2000/svg"
-                            xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="14px" height="26px"
-                            viewBox="0 0 14 26" enable-background="new 0 0 14 26" xml:space="preserve">
-                            <path
-                                d="M13,26c-0.256,0-0.512-0.098-0.707-0.293l-12-12c-0.391-0.391-0.391-1.023,0-1.414l12-12c0.391-0.391,1.023-0.391,1.414,0s0.391,1.023,0,1.414L2.414,13l11.293,11.293c0.391,0.391,0.391,1.023,0,1.414C13.512,25.902,13.256,26,13,26z" />
-                        </svg>
-                        <span class="alt sr-only"></span>
-                    </span>
-                </div>
-                <div class="arrow button--next">
-                    <span class="svg svg-arrow-right">
-                        <svg version="1.1" id="svg5-Layer_1" xmlns="http://www.w3.org/2000/svg"
-                            xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="14px" height="26px"
-                            viewBox="0 0 14 26" enable-background="new 0 0 14 26" xml:space="preserve">
-                            <path
-                                d="M1,0c0.256,0,0.512,0.098,0.707,0.293l12,12c0.391,0.391,0.391,1.023,0,1.414l-12,12c-0.391,0.391-1.023,0.391-1.414,0s-0.391-1.023,0-1.414L11.586,13L0.293,1.707c-0.391-0.391-0.391-1.023,0-1.414C0.488,0.098,0.744,0,1,0z" />
-                        </svg>
-                        <span class="alt sr-only"></span>
-                    </span>
-                </div>
+        <section id="image-carousel" class="splide" aria-label="">
+            <div class="splide__track">
+                <ul class="splide__list">
+                    <li class="splide__slide">
+                        <img src="photos/vertical/001.jpg" alt="" class="splide__slide__image">
+                    </li>
+                    <li class="splide__slide">
+                        <img src="photos/vertical/002.jpg" alt="" class="splide__slide__image">
+                    </li>
+                    <li class="splide__slide">
+                        <img src="photos/vertical/003.jpg" alt="" class="splide__slide__image">
+                    </li>
+                    <li class="splide__slide">
+                        <img src="photos/vertical/004.jpg" alt="" class="splide__slide__image">
+                    </li>
+                </ul>
             </div>
-
-            <div class="slide slide--no-4">
-                <img class="slide__img" src="photos/4_3/004.jpg"
-                    style="translate: none; rotate: none; scale: none; transform: translate(0%, 0px) scale(1.2, 1.2); opacity: 0;">
-            </div>
-            <div class="slide slide--no-3">
-                <img class="slide__img" src="photos/4_3/003.jpg"
-                    style="translate: none; rotate: none; scale: none; transform: translate(0%, 0px) scale(1.2, 1.2); opacity: 0;">
-            </div>
-            <div class="slide slide--no-2">
-                <img class="slide__img" src="photos/4_3/002.jpg"
-                    style="translate: none; rotate: none; scale: none; transform: translate(0%, 0px) scale(1.2, 1.2); opacity: 0;">
-            </div>
-            <div class="slide slide--no-1">
-                <img class="slide__img" src="photos/4_3/001.jpg"
-                    style="translate: none; rotate: none; scale: none; transform: translate(0%, 0px) scale(1.2, 1.2); opacity: 1;">
-            </div>
-
-        </div>
+        </section>
     </div>
-
-
-
 </body>
 
 </html>
