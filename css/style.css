@@ -1,0 +1,118 @@
+.portfolio {
+  position: absolute;
+  height: 100vh;
+  width: 100%;
+  top: 0;
+  background: #272c38;
+  transition: 0.5s easeOut;
+  transform: translateY(0);
+  overflow: hidden;
+}
+
+.slideshow {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
+.slide {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 100%;
+  grid-template-rows: 100%;
+  align-items: center;
+  justify-items: center;
+  top: 0;
+}
+.slide--current {
+  position: relative;
+}
+.slide__copy {
+  overflow: hidden;
+  grid-area: 1/1/1/1;
+  position: relative;
+  text-align: center;
+}
+.slide__title {
+  font-size: 6vw;
+  margin: 0;
+  margin-bottom: 0;
+  display: block;
+  color: white;
+  overflow: hidden;
+}
+.slide__title span {
+  display: block;
+}
+.slide__subtitle {
+  font-size: 1.6vw;
+  margin: lightgrey;
+  color: grey;
+  display: block;
+  overflow: hidden;
+}
+.slide__subtitle span {
+  display: block;
+}
+.slide__img-wrap {
+  height: calc(100vh - 8em);
+  width: calc(100vw - 8em);
+  grid-area: 1/1/1/1;
+  position: relative;
+  overflow: hidden;
+}
+.slide__img {
+  background: #272c38;
+  height: 100%;
+  width: 100%;
+  background-position: center center;
+  transform: scale(1.2);
+  transition: 0.4s ease;
+}
+.slide__img:hover {
+  transform: scale(1);
+}
+.slide--leading-edge .slide__img {
+  background: url("https://edgeassets-7e6a.kxcdn.com/img/banners/home/banner-home-large.jpg");
+  background-size: cover;
+  background-position: center right;
+}
+.slide--wanderwall .slide__img {
+  background: lime;
+  background-size: cover;
+}
+.slide__img-reveal {
+  background: #272c38;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+.page {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  opacity: 0;
+}
+.button {
+  position: absolute;
+  z-index: 10;
+  background: none;
+  padding: 0;
+  border: none;
+}
+.button--next {
+  right: 0;
+  top: 50%;
+}
+.button--prev {
+  left: 0;
+  top: 50%;
+}/*# sourceMappingURL=style.css.map */
