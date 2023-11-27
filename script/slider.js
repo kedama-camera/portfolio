@@ -132,12 +132,51 @@ class Slideshow {
     }
 }
 
+class ImageSwitcher {
+
+    horizontalImages = [
+        "photos/16_9/004.jpg",
+        "photos/16_9/003.jpg",
+        "photos/16_9/002.jpg",
+        "photos/16_9/001.jpg",
+    ];
+
+    verticalImages = [
+        "photos/9_16/004.jpg",
+        "photos/9_16/003.jpg",
+        "photos/9_16/002.jpg",
+        "photos/9_16/001.jpg",
+    ];
+
+    elements;
+
+    constructor() {
+        this.elements = document.querySelectorAll(".slide__img");
+        this.switchImageIfRotated();
+    }
+
+    isHorizontal() {
+        return (window.innerHeight <= window.innerWidth);
+    }
+
+    switchImageIfRotated() {
+        console.log("isHorizontal : " + this.isHorizontal());
+        if (this.isHorizontal()) {
+            this.elements.forEach((el, index) => { el.setAttribute("src", this.horizontalImages[index]) });
+        } else {
+            this.elements.forEach((el, index) => { el.setAttribute("src", this.verticalImages[index]) });
+        }
+    }
+}
+
+
 var intervalFunction;
 window.addEventListener("load", (event) => {
-    console.log("loaded");
     const slideshow = new Slideshow(document.querySelector(".slideshow"));
-
     intervalFunction = setInterval(() => {
         slideshow.prev()
     }, 5000);
+
+    const resolutionCalculator = new ImageSwitcher();
+    window.addEventListener('resize', () => resolutionCalculator.switchImageIfRotated());
 });

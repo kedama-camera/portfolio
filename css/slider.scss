@@ -73,31 +73,18 @@ $bg: #272c38;
     background-position: center center;
     transform: scale(1.2);
     transition: 0.4s ease;
-
-    #{$root}--no-1 & {
-      background: url("../photos/4_3/001.jpg");
-      background-size: cover;
-      background-position: center;
-    }
+    background-size: cover;
+    background-position: center;
 
     #{$root}--no-2 & {
-      background: url("../photos/4_3/002.jpg");
-      background-size: cover;
-      background-position: center;
       opacity: 0;
     }
 
     #{$root}--no-3 & {
-      background: url("../photos/4_3/003.jpg");
-      background-size: cover;
-      background-position: center;
       opacity: 0;
     }
 
     #{$root}--no-4 & {
-      background: url("../photos/4_3/004.jpg");
-      background-size: cover;
-      background-position: center;
       opacity: 0;
     }
   }
