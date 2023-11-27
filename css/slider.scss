@@ -73,18 +73,32 @@ $bg: #272c38;
     background-position: center center;
     transform: scale(1.2);
     transition: 0.4s ease;
-    &:hover {
-      transform: scale(1);
-    }
-    #{$root}--leading-edge & {
-      background: url("https://thumb.ac-illust.com/2b/2bb867cfe0a3bf57613a52f6f844863c_t.jpeg");
-      background-size: cover;
-      background-position: center right;
-    }
-    #{$root}--wanderwall & {
-      background: url("https://thumb.ac-illust.com/cf/cf8b964d27b4222926f632cda9ad5eb4_t.jpeg");      
+
+    #{$root}--no-1 & {
+      background: url("../photos/4_3/001.jpg");
       background-size: cover;
       background-position: center;
+    }
+
+    #{$root}--no-2 & {
+      background: url("../photos/4_3/002.jpg");
+      background-size: cover;
+      background-position: center;
+      opacity: 0;
+    }
+
+    #{$root}--no-3 & {
+      background: url("../photos/4_3/003.jpg");
+      background-size: cover;
+      background-position: center;
+      opacity: 0;
+    }
+
+    #{$root}--no-4 & {
+      background: url("../photos/4_3/004.jpg");
+      background-size: cover;
+      background-position: center;
+      opacity: 0;
     }
   }
   &__img-reveal {

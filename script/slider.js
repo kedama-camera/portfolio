@@ -6,7 +6,7 @@ class Slide {
 
         this.config = {
             duration: 0.6,
-            ease: Expo.easeOut
+            ease: Power1.out
         };
     }
     setCurrent(isCurrent = true) {
@@ -21,24 +21,39 @@ class Slide {
     toggle(action, direction) {
         return new Promise((resolve, reject) => {
             console.log(action, direction);
-
-            const defaultOptions = {
-                delay: action === "hide" ? 0 : this.config.duration / 2,
-                ease: this.config.ease,
-                opacity: action === "hide" ? 0 : 1
-            };
-            const imgOptions = Object.assign({ onComplete: resolve }, defaultOptions);
-
-            imgOptions.startAt =
-                action === "show"
-                    ? { opacity: 0, x: direction === "left" ? "-10%" : "10%" }
-                    : {};
-
-            imgOptions.x =
-                action === "hide" ? (direction === "left" ? "10%" : "-10%") : "0%";
-
-            gsap.to(this.DOM.img, imgOptions);
+            if (action === "show") {
+                return this.showImage(direction, resolve);
+            } else if (action === "hide") {
+                return this.hideImage(direction, resolve);
+            } else {
+                console.error("Directionの指定値にミスがあります。:" + direction);
+            }
         });
+    }
+
+    hideImage(direction, resolve) {
+        const option = {
+            delay: 0,
+            ease: this.config.ease,
+            opacity: 0,
+            onComplete: resolve,
+            startAt: {},
+            x: direction === "right" ? "50%" : "-50%"
+        };
+        return gsap.to(this.DOM.img, option);
+    }
+
+    showImage(direction, resolve) {
+        const from = { opacity: 0, x: (direction === "right" ? "-50%" : "50%") };
+        const to = {
+            delay: this.config.duration / 2,
+            ease: this.config.ease,
+            onComplete: resolve,
+            opacity: 1,
+            x: "0%"
+        };
+
+        gsap.fromTo(this.DOM.img, from, to);
     }
 }
 
@@ -65,9 +80,11 @@ class Slideshow {
 
     initEvents() {
         this.DOM.buttonNext.addEventListener("click", () => {
+            clearInterval(intervalFunction);
             this.next();
         });
         this.DOM.buttonPrev.addEventListener("click", () => {
+            clearInterval(intervalFunction);
             this.prev();
         });
     }
@@ -78,6 +95,10 @@ class Slideshow {
 
     prev() {
         this.navigate("left");
+    }
+
+    getReverseString(direction) {
+        return direction === "right" ? "left" : "right";
     }
 
     navigate(direction) {
@@ -111,11 +132,12 @@ class Slideshow {
     }
 }
 
+var intervalFunction;
 window.addEventListener("load", (event) => {
     console.log("loaded");
     const slideshow = new Slideshow(document.querySelector(".slideshow"));
 
-    // setInterval(() => {
-    //     slideshow.next()
-    // }, 5000);
+    intervalFunction = setInterval(() => {
+        slideshow.prev()
+    }, 5000);
 });
