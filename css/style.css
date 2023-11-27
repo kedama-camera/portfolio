@@ -101,6 +101,7 @@
   left: 0;
   opacity: 0;
 }
+
 .button {
   position: absolute;
   z-index: 10;
@@ -115,4 +116,33 @@
 .button--prev {
   left: 0;
   top: 50%;
+}
+
+.arrows .arrow {
+  margin: -33px 0 0;
+  padding: 20px;
+  position: absolute;
+  top: 50%;
+  cursor: pointer;
+  z-index: 3;
+}
+.arrows .prev {
+  left: 30px;
+}
+.arrows .prev:hover .svg {
+  left: -10px;
+}
+.arrows .next {
+  right: 30px;
+}
+.arrows .next:hover .svg {
+  left: 10px;
+}
+.arrows .svg {
+  position: relative;
+  left: 0;
+  width: 14px;
+  height: 26px;
+  fill: #fff;
+  transition: left 0.2s ease;
 }/*# sourceMappingURL=style.css.map */
