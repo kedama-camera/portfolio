@@ -1,12 +1,11 @@
 $bg: #ffffff;
+
 body {
   background: rgba($color: #0e0e0e, $alpha: 1.0);
   background-image: url("../asset/background.jpg");
   display: flex;
   align-items: center;
   flex-direction: column;
-  width: 100vw;
-  height: 100vh;
 }
 
 .header {
@@ -16,7 +15,7 @@ body {
   display: flex;
   align-items: center;
   top: 0;
-  height: 75px;
+  height: 15%;
   padding: 20px 10px;
   position: fixed;
   justify-content: space-between;
@@ -39,15 +38,16 @@ body {
   }
 }
 
-.portfolio {
+.main-visual {
+  width: 100%;
+
   .splide {
     &__slide {
       text-align: center;
 
       & img {
         width: 100%;
-        height: auto;
-        max-height: 100vh;
+        height: 100dvh;
         object-fit: cover;
       }
     }

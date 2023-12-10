@@ -4,8 +4,6 @@ body {
   display: flex;
   align-items: center;
   flex-direction: column;
-  width: 100vw;
-  height: 100vh;
 }
 
 .header {
@@ -15,7 +13,7 @@ body {
   display: flex;
   align-items: center;
   top: 0;
-  height: 75px;
+  height: 15%;
   padding: 20px 10px;
   position: fixed;
   justify-content: space-between;
@@ -35,13 +33,15 @@ body {
   margin-right: 10px;
 }
 
-.portfolio .splide__slide {
+.main-visual {
+  width: 100%;
+}
+.main-visual .splide__slide {
   text-align: center;
 }
-.portfolio .splide__slide img {
+.main-visual .splide__slide img {
   width: 100%;
-  height: auto;
-  max-height: 100vh;
+  height: 100dvh;
   -o-object-fit: cover;
      object-fit: cover;
 }/*# sourceMappingURL=slider.css.map */

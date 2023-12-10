@@ -2,9 +2,11 @@
 <html lang="ja">
 
 <head>
-    <script src="script/slider.js"></script>
+    <meta charset="utf-8">
     <link rel="stylesheet" href="css/destyle.css" />
     <link rel="stylesheet" href="css/slider.css" />
+    <link rel="stylesheet" href="css/modal.css" />
+
     <script src="
     https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js
     "></script>
@@ -16,6 +18,10 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@200&family=Oswald:wght@300;400;500&display=swap"
         rel="stylesheet">
+    <script src="script/slider.js"></script>
+    <script src="script/modal.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
 </head>
 
 <body>
@@ -26,32 +32,88 @@
                 <li><a href="#">Home</a></li>
                 <li><a href="#">Portfolio</a></li>
                 <li><a href="#">Profile</a></li>
-                <li><a href="#">Trade Act</a></li>
+                <li><a href="#" class="open-modal" data-target="trade-act">Trade Act</a></li>
             </ul>
+            <div class="min-h-screen flex flex-col justify-center">
+                <div class="relative py-3 sm:max-w-xl mx-auto">
+                    <nav x-data="{ open: false }">
+                        <button class="text-gray-500 w-10 h-10 relative focus:outline-none" @click="open = !open">
+                            <span class="sr-only">Open main menu</span>
+                            <div
+                                class="block w-5 absolute left-1/2 top-1/2   transform  -translate-x-1/2 -translate-y-1/2">
+                                <span aria-hidden="true"
+                                    class="block absolute h-0.5 w-5 bg-current transform transition duration-500 ease-in-out"
+                                    :class="{'rotate-45': open,' -translate-y-1.5': !open }"></span>
+                                <span aria-hidden="true"
+                                    class="block absolute  h-0.5 w-5 bg-current   transform transition duration-500 ease-in-out"
+                                    :class="{'opacity-0': open } "></span>
+                                <span aria-hidden="true"
+                                    class="block absolute  h-0.5 w-5 bg-current transform  transition duration-500 ease-in-out"
+                                    :class="{'-rotate-45': open, ' translate-y-1.5': !open}"></span>
+                            </div>
+                        </button>
+                    </nav>
+                </div>
+            </div>
         </nav>
     </header>
 
-
-    <div class="portfolio">
-        <section id="image-carousel" class="splide" aria-label="">
-            <div class="splide__track">
-                <ul class="splide__list">
-                    <li class="splide__slide">
-                        <img src="photos/vertical/001.jpg" alt="" class="splide__slide__image">
-                    </li>
-                    <li class="splide__slide">
-                        <img src="photos/vertical/002.jpg" alt="" class="splide__slide__image">
-                    </li>
-                    <li class="splide__slide">
-                        <img src="photos/vertical/003.jpg" alt="" class="splide__slide__image">
-                    </li>
-                    <li class="splide__slide">
-                        <img src="photos/vertical/004.jpg" alt="" class="splide__slide__image">
-                    </li>
-                </ul>
+    <main>
+        <section class="main-visual">
+            <div class="splide" role="group" id="image-carousel">
+                <div class="splide__track">
+                    <ul class="splide__list">
+                        <li class="splide__slide">
+                            <img alt="" class="splide__slide__image">
+                        </li>
+                        <li class="splide__slide">
+                            <img alt="" class="splide__slide__image">
+                        </li>
+                        <li class="splide__slide">
+                            <img alt="" class="splide__slide__image">
+                        </li>
+                        <li class="splide__slide">
+                            <img alt="" class="splide__slide__image">
+                        </li>
+                    </ul>
+                </div>
             </div>
         </section>
+
+
+        <section class="">
+            <h2>
+                ゴリラ
+            </h2>
+        </section>
+    </main>
+
+
+
+
+
+    <div class="modal-wrapper" id="trade-act">
+        <div class="modal-overlay close-modal" data-target="trade-act"></div>
+        <div class="modal-window">
+            <div class="modal-content">
+                <p class="modal_title">モーダルの中身</p>
+                <p>
+                    ああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああ
+                </p>
+                <p>
+                    ああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああ
+                </p>
+                <p>
+                    いいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいい
+                </p>
+                <p>
+                    いいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいい
+                </p>
+            </div>
+        </div>
     </div>
+
+
 </body>
 
 </html>

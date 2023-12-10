@@ -18,8 +18,15 @@ class ImageSwitcher {
     sliderImageElements;
 
     constructor() {
-        this.sliderImageElements = document.querySelectorAll(".splide__slide__image");
+        this.getSliderImageElements();
         this.switchImageIfRotated();
+    }
+
+    getSliderImageElements() {
+        if (this.sliderImageElements) {
+            return;
+        }
+        this.sliderImageElements = document.querySelectorAll(".splide__slide__image");
     }
 
     isHorizontal() {
@@ -29,6 +36,7 @@ class ImageSwitcher {
     }
 
     switchImageIfRotated() {
+        this.getSliderImageElements();
         if (this.isHorizontal()) {
             this.sliderImageElements.forEach((el, index) => { el.setAttribute("src", this.horizontalImages[index]); });
         } else {
@@ -43,13 +51,15 @@ class SplidejsManager {
     // splideの本体
     splidejs;
 
-    scrollInterval = 5000;
-
     option = {
         type: "fade",
         speed: 1000,
         rewind: true,
+        arrows: false,
     };
+
+    enableAutoScroll = true;
+    scrollInterval = 2500;
 
     initializeSplitejs(isEnableExtension) {
         if (isEnableExtension) {
@@ -57,9 +67,13 @@ class SplidejsManager {
         } else {
             this.splidejs = new Splide('#image-carousel', this.option).mount();
         }
+
+        if (this.enableAutoScroll) {
+            this.setAutoScrollFunction();
+        }
     }
 
-    enableAutoScroll() {
+    setAutoScrollFunction() {
         setInterval(() => {
             splidejsManager.next();
         }, this.scrollInterval);
@@ -77,10 +91,10 @@ class SplidejsManager {
 
 // 各クラスの初期化
 const splidejsManager = new SplidejsManager();
+// const imageSwitcher = new ImageSwitcher();
 let imageSwitcher;
 document.addEventListener('DOMContentLoaded', () => {
     splidejsManager.initializeSplitejs();
-    splidejsManager.enableAutoScroll();
 });
 
 window.addEventListener('load', () => {
