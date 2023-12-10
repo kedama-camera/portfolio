@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="css/hamburger.css" />
+</head>
+
+<body>
+    <header class="header">
+        <div class="header__inner">
+            <button id="js-hamburger" type="button" class="hamburger" aria-controls="navigation" aria-expanded="false"
+                aria-label="メニューを開く">
+                <span class="hamburger__line"></span>
+                <span class="hamburger__text"></span>
+            </button>
+            <div class="header__nav-area js-nav-area" id="navigation">
+                <nav id="js-global-navigation" class="global-navigation">
+                    <ul class="global-navigation__list">
+                        <li>
+                            <a href="#" class="global-navigation__link">
+                                メニュー
+                            </a>
+                        </li>
+                        <li>
+                            <button type="button" class="global-navigation__link -accordion js-sp-accordion-trigger"
+                                aria-expanded='false' aria-controls="accordion1">
+                                親メニュー
+                            </button>
+                            <div id="accordion1" class="accordion js-accordion">
+                                <ul class="accordion__list">
+                                    <li>
+                                        <a href="#" class="accordion__link">
+                                            子メニュー
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="accordion__link">
+                                            子メニュー
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="accordion__link">
+                                            子メニュー
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li>
+                            <a href="#" class="global-navigation__link">
+                                メニュー
+                            </a>
+                        </li>
+                    </ul>
+                    <div id="js-focus-trap" tabindex="0"></div>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <section>
+        <p>test</p>
+    </section>
+</body>
+
+
+<script>
+    // メニュー展開時に背景を固定
+    const backgroundFix = (bool) => {
+        const scrollingElement = () => {
+            const browser = window.navigator.userAgent.toLowerCase();
+            if ("scrollingElement" in document) return document.scrollingElement;
+            return document.documentElement;
+        };
+
+        const scrollY = bool
+            ? scrollingElement().scrollTop
+            : parseInt(document.body.style.top || "0");
+
+        const fixedStyles = {
+            height: "100vh",
+            position: "fixed",
+            top: `${scrollY * -1}px`,
+            left: "0",
+            width: "100vw"
+        };
+
+        Object.keys(fixedStyles).forEach((key) => {
+            document.body.style[key] = bool ? fixedStyles[key] : "";
+        });
+
+        if (!bool) {
+            window.scrollTo(0, scrollY * -1);
+        }
+    };
+
+    // 変数定義
+    const CLASS = "-active";
+    let flg = false;
+    let accordionFlg = false;
+
+    let hamburger = document.getElementById("js-hamburger");
+    let focusTrap = document.getElementById("js-focus-trap");
+    let menu = document.querySelector(".js-nav-area");
+    let accordionTrigger = document.querySelectorAll(".js-sp-accordion-trigger");
+    let accordion = document.querySelectorAll(".js-sp-accordion");
+
+    // メニュー開閉制御
+    hamburger.addEventListener("click", (e) => { //ハンバーガーボタンが選択されたら
+        e.currentTarget.classList.toggle(CLASS);
+        menu.classList.toggle(CLASS);
+        if (flg) {// flgの状態で制御内容を切り替え
+            backgroundFix(false);
+            hamburger.setAttribute("aria-expanded", "false");
+            hamburger.focus();
+            flg = false;
+        } else {
+            backgroundFix(true);
+            hamburger.setAttribute("aria-expanded", "true");
+            flg = true;
+        }
+    });
+    window.addEventListener("keydown", () => {　//escキー押下でメニューを閉じられるように
+        if (event.key === "Escape") {
+            hamburger.classList.remove(CLASS);
+            menu.classList.remove(CLASS);
+
+            backgroundFix(false);
+            hamburger.focus();
+            hamburger.setAttribute("aria-expanded", "false");
+            flg = false;
+        }
+    });
+
+    // メニュー内アコーディオン制御
+    accordionTrigger.forEach((item) => {
+        item.addEventListener("click", (e) => {
+            e.currentTarget.classList.toggle(CLASS);
+            e.currentTarget.nextElementSibling.classList.toggle(CLASS);
+            if (accordionFlg) {
+                e.currentTarget.setAttribute("aria-expanded", "false");
+                accordionFlg = false;
+            } else {
+                e.currentTarget.setAttribute("aria-expanded", "true");
+                accordionFlg = true;
+            }
+        });
+
+    });
+
+    // フォーカストラップ制御
+    focusTrap.addEventListener("focus", (e) => {
+        hamburger.focus();
+    });
+
+</script>
+
+</html>
