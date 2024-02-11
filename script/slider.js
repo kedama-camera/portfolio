@@ -97,7 +97,7 @@ document.addEventListener('DOMContentLoaded', () => {
     splidejsManager.initializeSplitejs();
 });
 
-window.addEventListener('load', () => {
-    imageSwitcher = new ImageSwitcher();
-    window.addEventListener('resize', () => imageSwitcher.switchImageIfRotated());
-});
+// window.addEventListener('load', () => {
+//     imageSwitcher = new ImageSwitcher();
+//     window.addEventListener('resize', () => imageSwitcher.switchImageIfRotated());
+// });
