@@ -3,8 +3,11 @@
 
 <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/destyle.css" />
     <link rel="stylesheet" href="css/index.css" />
+    <link rel="stylesheet" href="css/header.css" />
+
     <link rel="stylesheet" href="css/modal.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -27,14 +30,27 @@
 
 <body>
     <header class="header">
-        <h1>Kedama-camera</h1>
         <nav class="nav">
-            <ul class="nav__menu">
-                <li><a href="#">Home</a></li>
-                <li><a href="#">Portfolio</a></li>
-                <li><a href="#">Profile</a></li>
-                <li><a href="#" class="open-modal" data-target="trade-act">Trade Act</a></li>
-            </ul>
+            <input id="nav-check" type="checkbox" class="nav-check">
+            <div class="nav-header">
+                <div class="nav-title">
+                    Kedama-camera
+                </div>
+            </div>
+            <div class="nav-btn">
+                <label for="nav-check">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </label>
+            </div>
+
+            <div class="nav-links">
+                <a href="" target="_blank">Home</a>
+                <a href="" target="_blank">Portfolio</a>
+                <a href="" target="_blank">Profile</a>
+                <a href="#" class="open-modal" data-target="trade-act">Trade Act</a>
+            </div>
         </nav>
     </header>
 
@@ -66,9 +82,6 @@
 
 
         <section class="">
-            <h2>
-                ゴリラ
-            </h2>
         </section>
     </main>
 
